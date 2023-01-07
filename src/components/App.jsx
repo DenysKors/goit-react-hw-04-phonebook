@@ -16,8 +16,8 @@ export function App() {
   }, [contacts]);
 
   const deleteContactById = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId)
     );
   };
 
@@ -32,7 +32,7 @@ export function App() {
     }
 
     formData.id = nanoid();
-    setContacts(prevState => [formData, ...prevState]);
+    setContacts(prevContacts => [formData, ...prevContacts]);
   };
 
   const sortByFilter = evt => {
@@ -40,6 +40,7 @@ export function App() {
   };
 
   const getFilteredContacts = () => {
+    console.log('filter');
     const normalizedText = filter.toLowerCase();
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedText)
